@@ -1,0 +1,15 @@
+package com.book.enums;
+
+public enum Genre 
+{
+	BIOGRAPHY,
+	AUTOBIOGRAPHY,
+	SELF_DEVLOPMENT,
+	FICTION,
+	FANTACY,
+	EVOLUTION,
+	HISTORY,
+	STORY,
+	SCIENCE
+
+}
