@@ -42,4 +42,41 @@ public class ReviewServiceImpl implements ReviewService{
 	  return response;
 	}
 
+	@Override
+	public ResponseStructure<?> findbyId(int id) 
+	{
+		  ReviewDto rvdto = dao.findbyId(id);
+		  ResponseStructure<ReviewDto> response=new ResponseStructure<>();
+		  response.setData(rvdto);
+		  response.setHttpStatus(HttpStatus.FOUND);
+		  response.setMessage("Data Retrived Sussfully");
+		  
+		  return response;
+	}
+
+	@Override
+	public ResponseStructure<?> update(int id, Review review) 
+	{
+		 ReviewDto rvdto = dao.update(id,review);
+		  ResponseStructure<ReviewDto> response=new ResponseStructure<>();
+		  response.setData(rvdto);
+		  response.setHttpStatus(HttpStatus.FOUND);
+		  response.setMessage("Data Retrived Sussfully");
+		  
+		  return response;
+	}
+
+	@Override
+	public ResponseStructure<?> delete(int reviewId) 
+	{
+		String delete = dao.delete(reviewId);
+		 ResponseStructure<String> response=new ResponseStructure<>();
+		  response.setData(delete);
+		  response.setHttpStatus(HttpStatus.FOUND);
+		  response.setMessage("Data Retrived Sussfully");
+		  
+		  return response;
+		
+	}
+
 }

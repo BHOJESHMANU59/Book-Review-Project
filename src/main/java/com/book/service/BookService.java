@@ -12,4 +12,12 @@ public interface BookService {
 
 	public ResponseStructure<List<BookDto>> fetchAll();
 
+	public ResponseStructure<BookDto> findbyId(int bookId);
+
+	public ResponseStructure<BookDto> findbyName(String name);
+
+	public ResponseStructure<BookDto> update(int id, Book book);
+
+	public ResponseStructure<String> delete(int id);
+
 }

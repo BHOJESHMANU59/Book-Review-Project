@@ -12,4 +12,10 @@ public interface ReviewService {
 
 public ResponseStructure<List<ReviewDto>> fetchAll();
 
+public ResponseStructure<?> findbyId(int id);
+
+public ResponseStructure<?> update(int id, Review review);
+
+public ResponseStructure<?> delete(int reviewId);
+
 }

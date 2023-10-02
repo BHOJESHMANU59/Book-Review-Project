@@ -46,6 +46,42 @@ public class GlobalExceptionHandler
 		
 		return new ResponseEntity<>(error, error.getHttpStatus());
 	}
+	
+	@ExceptionHandler(UserIdNotFoundException.class)
+	public ResponseEntity<?> handleUserIdNotFoundException(UserIdNotFoundException exception,HttpServletRequest request)
+	{
+		ApiError error=new ApiError();
+		error.setMessage(exception.getMessage());;
+		error.setLocalDateTime(LocalDateTime.now());
+		error.setEndpoint(request.getRequestURI());
+		error.setHttpStatus(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<>(error, error.getHttpStatus());
+	}
+	
+	@ExceptionHandler(BookIdNotFoundException.class)
+	public ResponseEntity<?> handleBookIdNotFoundException(BookIdNotFoundException exception,HttpServletRequest request)
+	{
+		ApiError error=new ApiError();
+		error.setMessage(exception.getMessage());;
+		error.setLocalDateTime(LocalDateTime.now());
+		error.setEndpoint(request.getRequestURI());
+		error.setHttpStatus(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<>(error, error.getHttpStatus());
+	}
+	
+	@ExceptionHandler(ReviewIdNoFoundException.class)
+	public ResponseEntity<?> handleReviewIdNoFoundException(ReviewIdNoFoundException exception,HttpServletRequest request)
+	{
+		ApiError error=new ApiError();
+		error.setMessage(exception.getMessage());;
+		error.setLocalDateTime(LocalDateTime.now());
+		error.setEndpoint(request.getRequestURI());
+		error.setHttpStatus(HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<>(error, error.getHttpStatus());
+	}
 
 
 }

@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +37,28 @@ public class ReviewController {
 	{
 		ResponseStructure<List<ReviewDto>> responseStructure=service.fetchAll();
 		return new ResponseEntity<ResponseStructure<List<ReviewDto>>>(responseStructure,responseStructure.getHttpStatus());
+	}
+	
+	@GetMapping("{reviweId}")
+	public ResponseEntity<?> findbyId(@PathVariable ("reviweId")int id)
+	{
+		ResponseStructure<?> responseStructure=service.findbyId(id);
+		return new ResponseEntity<>(responseStructure,responseStructure.getHttpStatus());
+	}
+	
+	@PutMapping("{reviewId}/review")
+	public ResponseEntity<?> update(@PathVariable ("reviewId") int id,@RequestBody Review review)
+	{
+		ResponseStructure<?> responseStructure=service.update(id,review);
+		return new ResponseEntity<>(responseStructure,responseStructure.getHttpStatus());
+	}
+	
+	@DeleteMapping("delete/{reviewId}")
+	public ResponseEntity<?> delete(@PathVariable int reviewId)
+	{
+		ResponseStructure<?> responseStructure=service.delete(reviewId);
+		return new ResponseEntity<>(responseStructure,responseStructure.getHttpStatus());
+		
 	}
 
 }

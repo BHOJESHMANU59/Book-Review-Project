@@ -12,6 +12,7 @@ import com.book.entitys.Book;
 import com.book.entitys.Review;
 import com.book.entitys.User;
 import com.book.exceptions.BookNotFoundException;
+import com.book.exceptions.ReviewIdNoFoundException;
 import com.book.exceptions.ReviewNotFoundException;
 import com.book.repository.BookRepository;
 import com.book.repository.ReviewRepository;
@@ -65,6 +66,8 @@ public class ReviewDao {
 
 	public List<ReviewDto> fetchAll() 
 	{
+		
+		
 		List<Review> review = repo.findAll();
 		
 		List<ReviewDto> rd=new ArrayList<>();
@@ -73,10 +76,12 @@ public class ReviewDao {
 		{
 			for (Review rv : review) 
 			{
-				dto.setReviewId(rv.getReviewId());
-				dto.setRating(rv.getRating());
-				dto.setReview(rv.getReview());
-				rd.add(dto);
+				ReviewDto rvdto=new ReviewDto();
+				
+				rvdto.setReviewId(rv.getReviewId());
+				rvdto.setRating(rv.getRating());
+				rvdto.setReview(rv.getReview());
+				rd.add(rvdto);
 				
 			}
 			return rd;
@@ -87,5 +92,56 @@ public class ReviewDao {
 		}
 		
 	}
+
+
+	public ReviewDto findbyId(int id) 
+	{
+		Optional<Review> review = repo.findById(id);
+		if(review.isPresent())
+		{
+			Review rv = review.get();
+			dto.setReviewId(rv.getReviewId());
+			dto.setRating(rv.getRating());
+			dto.setReview(rv.getReview());
+			return dto;
+		}
+		throw new ReviewIdNoFoundException("Invalid Review Id");
+	}
+
+
+	public ReviewDto update(int id, Review review) 
+	{
+		Optional<Review> rv = repo.findById(id);
+		if(rv.isPresent())
+		{
+			Review rview = rv.get();
+			rview.setReviewId(review.getReviewId());
+			rview.setRating(review.getRating());
+			rview.setReview(review.getReview());
+			
+			Review rvw = repo.save(rview);
+			
+			dto.setReviewId(rvw.getReviewId());
+			dto.setRating(rvw.getRating());
+			dto.setReview(rvw.getReview());
+			return dto;
+		}
+		throw new ReviewNotFoundException("Reviews Not Found");
+	}
+
+
+	public String delete(int reviewId) 
+	{
+		Optional<Review> review = repo.findById(reviewId);
+		if(review.isPresent())
+		{
+			repo.delete(review.get());
+			return "Review Deleted Successfully "+ review.get().getReviewId();
+		}
+		throw new ReviewIdNoFoundException("Invalid Review Id");
+		
+	}
+
+
 
 }

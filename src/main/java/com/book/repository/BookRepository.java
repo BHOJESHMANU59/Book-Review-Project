@@ -6,4 +6,6 @@ import com.book.entitys.Book;
 
 public interface BookRepository  extends JpaRepository<Book, Integer>{
 
+	public Book findByBookName(String name);
+
 }

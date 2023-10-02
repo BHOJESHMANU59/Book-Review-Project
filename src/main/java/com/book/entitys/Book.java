@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.book.enums.Genre;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +32,7 @@ public class Book
 	private Genre genre;
 	
 	private double price;
-	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User user;
 	

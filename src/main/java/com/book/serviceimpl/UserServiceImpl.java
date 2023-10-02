@@ -44,4 +44,53 @@ public class UserServiceImpl  implements UserService{
 		return response;
 	}
 
+	@Override
+	public ResponseStructure<?> findById(int id) 
+	{
+		UserDto user = dao.findbyId(id);
+		
+		ResponseStructure<UserDto> response=new ResponseStructure<>();
+		response.setData(user);
+		response.setHttpStatus(HttpStatus.FOUND);
+		response.setMessage("Data Retrived Successfully");
+		return response;
+	}
+
+	@Override
+	public ResponseStructure<?> findByName(String name) {
+		UserDto user = dao.findbyName(name);
+		
+		ResponseStructure<UserDto> response=new ResponseStructure<>();
+		response.setData(user);
+		response.setHttpStatus(HttpStatus.FOUND);
+		response.setMessage("Data Retrived Successfully");
+		return response;
+	}
+
+	@Override
+	public ResponseStructure<?> update(int id, User user) 
+	{
+		UserDto u = dao.update(id,user);
+		
+		ResponseStructure<UserDto> response=new ResponseStructure<>();
+		response.setData(u);
+		response.setHttpStatus(HttpStatus.FOUND);
+		response.setMessage("Data Retrived Successfully");
+		return response;	
+	}
+
+	@Override
+	public ResponseStructure<String> delete(int userId) 
+	{
+		String delete = dao.delete(userId);
+		
+		ResponseStructure<String> response=new ResponseStructure<>();
+		response.setData(delete);
+		response.setHttpStatus(HttpStatus.OK);
+		response.setMessage("Data Deleted Successfully");
+		return response;	
+	}
+
+	
+
 }
